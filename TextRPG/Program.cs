@@ -6,32 +6,22 @@ namespace TextRPG
     {
         static void Main(string[] args)
         {
-            Hero Player = new Hero();
+            Player Player = new Player();
             Monster Creepy = new Monster("Uruglah", "Orc", 150, 10);
-            //Player.DisplayCharacteristics();
-            //Creepy.DisplayCharacteristics();
+            Village LittleVilla = new Village("Little Villa", 2, 200);
+
+            Player.DisplayStats();
+            Creepy.DisplayStats();
+
+            Player.MoveTo(LittleVilla);
+
+            Player.Hit(Player);
+            Creepy.DisplayStats();
+
+            Creepy.Hit(Creepy);
+            Player.DisplayStats();
+
             /*
-            BasicMan.Hit(Creepy);
-            Creepy.DisplayCharacteristics();
-
-            Creepy.Hit(BasicMan);
-            BasicMan.DisplayCharacteristics();
-            
-            BasicMan.RestoreHealth();
-            BasicMan.ShowInventory();
-            BasicMan.SellItem();
-            BasicMan.BuyItem();
-            BasicMan.ChangeWeapon();
-
-            BasicMan.PlayerInventory.AddItem("Дубина орчья");
-
-            BasicMan.PlayerSquad.ShowMembers();
-            
-            BasicMan.RestoreHealth();
-            BasicMan.DisplayCharacteristics();
-            */
-
-            
             void AskAction()
             {
                 //Вывод информации о текущем состоянии игрока, опрос о следующем действии.
@@ -64,7 +54,7 @@ namespace TextRPG
                 Creepy.DisplayCharacteristics();
             }
             
-
+            */
         }
         
         

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tvrbofx\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj": {}
+    "C:\\Users\\tvrbofx\\github\\TextRPG\\TextRPG\\TextRPG.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tvrbofx\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj": {
+    "C:\\Users\\tvrbofx\\github\\TextRPG\\TextRPG\\TextRPG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tvrbofx\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj",
+        "projectUniqueName": "C:\\Users\\tvrbofx\\github\\TextRPG\\TextRPG\\TextRPG.csproj",
         "projectName": "TextRPG",
-        "projectPath": "C:\\Users\\tvrbofx\\source\\repos\\TextRPG\\TextRPG\\TextRPG.csproj",
+        "projectPath": "C:\\Users\\tvrbofx\\github\\TextRPG\\TextRPG\\TextRPG.csproj",
         "packagesPath": "C:\\Users\\tvrbofx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tvrbofx\\source\\repos\\TextRPG\\TextRPG\\obj\\",
+        "outputPath": "C:\\Users\\tvrbofx\\github\\TextRPG\\TextRPG\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tvrbofx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -52,7 +52,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

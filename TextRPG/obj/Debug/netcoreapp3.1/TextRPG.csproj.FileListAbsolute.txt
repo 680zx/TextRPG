@@ -11,3 +11,16 @@ C:\Users\tvrbofx\source\repos\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.cs
 C:\Users\tvrbofx\source\repos\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.dll
 C:\Users\tvrbofx\source\repos\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.pdb
 C:\Users\tvrbofx\source\repos\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.genruntimeconfig.cache
+C:\Users\tvrbofx\github\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.csprojAssemblyReference.cache
+C:\Users\tvrbofx\github\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.AssemblyInfoInputs.cache
+C:\Users\tvrbofx\github\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.AssemblyInfo.cs
+C:\Users\tvrbofx\github\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.csproj.CoreCompileInputs.cache
+C:\Users\tvrbofx\github\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.dll
+C:\Users\tvrbofx\github\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.pdb
+C:\Users\tvrbofx\github\TextRPG\TextRPG\bin\Debug\netcoreapp3.1\TextRPG.exe
+C:\Users\tvrbofx\github\TextRPG\TextRPG\bin\Debug\netcoreapp3.1\TextRPG.deps.json
+C:\Users\tvrbofx\github\TextRPG\TextRPG\bin\Debug\netcoreapp3.1\TextRPG.runtimeconfig.json
+C:\Users\tvrbofx\github\TextRPG\TextRPG\bin\Debug\netcoreapp3.1\TextRPG.runtimeconfig.dev.json
+C:\Users\tvrbofx\github\TextRPG\TextRPG\bin\Debug\netcoreapp3.1\TextRPG.dll
+C:\Users\tvrbofx\github\TextRPG\TextRPG\bin\Debug\netcoreapp3.1\TextRPG.pdb
+C:\Users\tvrbofx\github\TextRPG\TextRPG\obj\Debug\netcoreapp3.1\TextRPG.genruntimeconfig.cache

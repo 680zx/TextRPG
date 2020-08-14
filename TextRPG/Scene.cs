@@ -7,29 +7,30 @@ namespace TextRPG
     abstract class Scene
     {
         public string Name;
-        public int NumberOfTraders;
+        public Trader[] Traders;
         public int Population;
 
 
-        public Scene(string name, int tradersNum, int population)
+        public Scene(string name, int population, Trader[] traders)
         {
             Name = name;
-            NumberOfTraders = tradersNum;
+            Traders = traders;
             Population = population;
         }
     }
 
     class Village:Scene
     {
-        public Village(string name, int tradersNum, int population) : base(name, tradersNum, population)
+        public Village(string name, int population, Trader[] traders) : base(name, population, traders)
         {
             //Console.WriteLine(Name + " village");
         }
+
     }
     
     class City:Scene
     {
-        public City(string name, int tradersNum, int population) : base(name, tradersNum, population)
+        public City(string name, int population, Trader[] traders) : base(name, population, traders)
         {
             //Console.WriteLine(Name + " city");
         }

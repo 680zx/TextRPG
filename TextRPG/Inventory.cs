@@ -6,7 +6,6 @@ namespace TextRPG
 {
     class Inventory
     {
-
         public int MaxVolume;
         public int FilledVolume;
 

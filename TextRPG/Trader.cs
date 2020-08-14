@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-/*
+
 namespace TextRPG
 {
     class Trader
@@ -9,7 +9,13 @@ namespace TextRPG
         public string StoreName;
         public int Gold;
 
-        private In
+        public Item[] Items = new Item[5];
+
+        public Trader(string storeName, int gold, params Item[] items)
+        {
+            StoreName = storeName;
+            Gold = gold;
+            Items = items;
+        }
     }
 }
-*/

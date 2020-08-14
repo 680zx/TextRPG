@@ -49,24 +49,6 @@ namespace TextRPG
             CurrentLocation = InitilalLocation;
             Inventory.Add(Weapon, Potion);
         }
-        /*
-        public Hero(string name, string race, string weapon, int health, int hitpower)
-            :base (name, race, weapon, health, hitpower)
-        {
-
-        }
-        */
-        /*
-        public void CreateHero()
-        {
-            Name = AskName();
-            Race = AskRace();
-            Weapon = "";
-            Health = 100;
-            HitPower = 15;
-            
-        }
-        */
        
         public int GetNextAction()
         {

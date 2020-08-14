@@ -80,7 +80,7 @@ namespace TextRPG
                 new Trader("Swords and Axes", 200, GetCommonQualityMeleeWeapons()),
                 new Trader("Bows 'n arrows", 220, GetCommonQualityRangeWeapons()),
                 new Trader("Grandma's tinctures", 100, GetPerfectQualityPotions()),
-                new Trader("Rokkie Lami", 100, GetCommonQualityPotions())
+                new Trader("Alchemist Lami", 100, GetCommonQualityPotions())
             };
 
             return traders;

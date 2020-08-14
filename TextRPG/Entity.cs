@@ -9,40 +9,45 @@ namespace TextRPG
     {
         public string Name;
         public string Race;
-        public string Weapon;
+        public Weapon Weapon;
         public int CurrentHealth;
         public int MaxHealth;
         public int HitPower;
 
         public void Hit(Entity entity)
         {
-            Console.WriteLine(Name + " hit " + entity.Name + " and did " + HitPower + " damage");
-            entity.CurrentHealth -= HitPower;
+            Console.WriteLine(Name + " hit " + entity.Name + " and did " + Weapon.Damage + " damage");
+            entity.CurrentHealth -= Weapon.Damage;
         }
 
         public void DisplayStats()
         {
             Console.WriteLine("Characteristics of " + Name + " race " + Race +
-                                ":\n\thealth: " +  CurrentHealth + "/" + MaxHealth +   "\n\thit power: " + HitPower);
+                                ":\n\thealth: " +  CurrentHealth + "/" + MaxHealth +   "\n\thit power: " + Weapon.Damage);
         }
     }
 
     class Player : Entity
     {
-        private Scene CurrentPosition;
+        public Scene CurrentLocation;
+        public Potion Potion;
 
-        private Inventory PlayerInventory = new Inventory();
+        public Inventory Inventory = new Inventory();
         private Squad PlayerSquad = new Squad();
         private string[] AvailableActions = new string[] {"Ударить", "Вылечиться",
             "Сменить оружие", "Просмотреть инвентарь", "Добавить в инвентарь" };
         
-        public Player()
+        public Player(Scene InitilalLocation, Weapon weapon, Potion potion)
         {
-            Name = SetName();
-            Race = ChooseRace();
-            Weapon = "";
+            Name = "TestName";//SetName();
+            Race = "TestRace";//ChooseRace();
+            Weapon = weapon;
+            Potion = potion;
             MaxHealth = CurrentHealth = 100;
             HitPower = 15;
+            Inventory.MaxVolume = 20;
+            CurrentLocation = InitilalLocation;
+            Inventory.Add(Weapon, Potion);
         }
         /*
         public Hero(string name, string race, string weapon, int health, int hitpower)
@@ -83,13 +88,16 @@ namespace TextRPG
 
         public void MoveTo(Scene scene)
         {
-            CurrentPosition = scene;
-            Console.WriteLine("You are now at " + CurrentPosition.Name);
+            CurrentLocation = scene;
+            Console.WriteLine("You are now in " + CurrentLocation.Name);
         }
 
         public void RestoreHealth() 
         {
-            CurrentHealth = MaxHealth;
+            if (CurrentHealth + Potion.HealingPower >= MaxHealth)
+                CurrentHealth = MaxHealth;
+            else
+                CurrentHealth += Potion.HealingPower;
             Console.WriteLine(Name + " restored health");
         }
 
@@ -101,12 +109,7 @@ namespace TextRPG
         public void ShowInventory()
         {
             //Console.WriteLine("Вызвать Инвентарь");
-            PlayerInventory.ShowItems();
-        }
-
-        public void AddToInventory(string item)
-        {
-            PlayerInventory.AddItem(item);
+            Inventory.Show();
         }
 
         public void BuyItem()
@@ -136,13 +139,13 @@ namespace TextRPG
     {
         public string GangName { get; set; }
         
-        public Monster(string name, string race, int health, int hitpower)
+        public Monster(string name, string race, int health, Weapon weapon)
             //: base(name, race, health, hitpower)
         {
             Name = name;
             Race = race;
             MaxHealth = CurrentHealth = health;
-            HitPower = hitpower;
+            Weapon = weapon;
         }
         
         public void RunAway()

@@ -10,6 +10,7 @@ namespace TextRPG
         public int NumberOfTraders;
         public int Population;
 
+
         public Scene(string name, int tradersNum, int population)
         {
             Name = name;
@@ -22,17 +23,15 @@ namespace TextRPG
     {
         public Village(string name, int tradersNum, int population) : base(name, tradersNum, population)
         {
-            Console.WriteLine(Name + " village");
+            //Console.WriteLine(Name + " village");
         }
-
     }
     
     class City:Scene
     {
         public City(string name, int tradersNum, int population) : base(name, tradersNum, population)
         {
-            Console.WriteLine("Город" + Name);
+            //Console.WriteLine(Name + " city");
         }
-
     }
 }

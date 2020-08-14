@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeflectTheBall;
+using System;
 
 namespace TextRPG
 {
@@ -6,21 +7,52 @@ namespace TextRPG
     {
         static void Main(string[] args)
         {
-            Player Player = new Player();
-            Monster Creepy = new Monster("Uruglah", "Orc", 150, 10);
-            Village LittleVilla = new Village("Little Villa", 2, 200);
+            Window.Width = 100;
+            Window.Height = 40;
+            //Window.GameMenu();
 
+            
+            Village LittleVilla = new Village("Little Villa", 2, 200);
+            City RedCastle = new City("Red Castle", 4, 1000);
+
+            Weapon WoodenMace = new Weapon("Wooden mace", 10, 5, 3);
+            Weapon Saber = new Weapon("Saber", 20, 10, 25);
+            Weapon LegendarySaber = new Weapon("Legendary Saber", 20, 17, 25);
+            Potion LargePotion = new Potion("Large healing potion", 20, 5, 10);
+
+            Player Player = new Player(LittleVilla, Saber, LargePotion);
+            Monster Creepy = new Monster("Uruglah", "Orc", 150, WoodenMace);
+
+            Console.WriteLine($"Now you are in {Player.CurrentLocation.Name}");
+
+            Player.MoveTo(RedCastle);
+            Console.WriteLine(Player.Inventory.MaxVolume + "\n\n" + Player.Inventory.FilledVolume);
+
+            Player.Inventory.Add(LegendarySaber);
+            Player.Inventory.Show();
+
+            /*
+            Player.Inventory.RemoveItem(LargePotion);
+            Player.Inventory.RemoveItem(LargePotion);
+            Player.Inventory.RemoveItem(Saber);
+            Player.ShowInventory();
+            Player.Inventory.RemoveItem(WoodenMace);
+            */
+            /*
             Player.DisplayStats();
             Creepy.DisplayStats();
 
             Player.MoveTo(LittleVilla);
 
-            Player.Hit(Player);
+            Player.Hit(Creepy);
             Creepy.DisplayStats();
-
-            Creepy.Hit(Creepy);
+            
+            Creepy.Hit(Player);
             Player.DisplayStats();
 
+            Player.RestoreHealth();
+            Player.DisplayStats();
+            */
             /*
             void AskAction()
             {

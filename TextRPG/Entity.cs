@@ -13,17 +13,20 @@ namespace TextRPG
         public int CurrentHealth;
         public int MaxHealth;
         public int HitPower;
+        public int Level;
+        public int Gold;
+        public bool isDead;
 
         public void Hit(Entity entity)
         {
-            Console.WriteLine(Name + " hit " + entity.Name + " and did " + Weapon.Damage + " damage");
-            entity.CurrentHealth -= Weapon.Damage;
+            Console.WriteLine(Name + " hit " + entity.Name + " and did " + Weapon.Power + " damage");
+            entity.CurrentHealth -= Weapon.Power;
         }
 
-        public void DisplayStats()
+        public void ShowStats()
         {
-            Console.WriteLine("Characteristics of " + Name + " race " + Race +
-                                ":\n\thealth: " +  CurrentHealth + "/" + MaxHealth +   "\n\thit power: " + Weapon.Damage);
+            Console.WriteLine("\n\n\tCharacteristics of " + Name + " race " + Race +
+                                "health: " +  CurrentHealth + "/" + MaxHealth +   "\n\thit power: " + Weapon.Power);
         }
     }
 
@@ -34,34 +37,26 @@ namespace TextRPG
 
         public Inventory Inventory = new Inventory();
         private Squad PlayerSquad = new Squad();
-        private string[] AvailableActions = new string[] {"Ударить", "Вылечиться",
-            "Сменить оружие", "Просмотреть инвентарь", "Добавить в инвентарь" };
+        public string[] BattleActions = new string[] {"Hit monster", "Heal myself", "Change weapon"};
         
-        public Player(Scene InitilalLocation, Weapon weapon, Potion potion)
+        public Player(Scene InitilalLocation)
         {
-            Name = "TestName";//SetName();
-            Race = "TestRace";//ChooseRace();
-            Weapon = weapon;
-            Potion = potion;
+            //Weapon = weapon;
+            //Potion = potion;
             MaxHealth = CurrentHealth = 100;
             HitPower = 15;
             Inventory.MaxVolume = 20;
+            Gold = 50;
+            Level = 1;
+            isDead = false;
             CurrentLocation = InitilalLocation;
-            Inventory.Add(Weapon, Potion);
+            //Inventory.Add(Weapon, Potion);
         }
        
-        public int GetNextAction()
+        public int GetBattleAction()
         {
-            DisplayStats();
-            Console.WriteLine("\nYour actions?");
-
-            int i = 0;
-
-            foreach (string action in AvailableActions)
-            {
-                Console.WriteLine($"\t{++i}) {action}");
-            }
-
+            //ShowStats();
+            //Console.WriteLine("\nYour actions?");
             int PlayerChoice = int.Parse(Console.ReadLine());
             Console.WriteLine(PlayerChoice);
 
@@ -76,22 +71,16 @@ namespace TextRPG
 
         public void RestoreHealth() 
         {
-            if (CurrentHealth + Potion.HealingPower >= MaxHealth)
+            if (CurrentHealth + Potion.Power >= MaxHealth)
                 CurrentHealth = MaxHealth;
             else
-                CurrentHealth += Potion.HealingPower;
+                CurrentHealth += Potion.Power;
             Console.WriteLine(Name + " restored health");
         }
 
         public void ChangeWeapon() 
         {
             Console.WriteLine("Changed weapon on");
-        }
-
-        public void ShowInventory()
-        {
-            //Console.WriteLine("Вызвать Инвентарь");
-            Inventory.Show();
         }
 
         public void BuyItem()
@@ -104,15 +93,15 @@ namespace TextRPG
             Console.WriteLine("Продать вещь");
         }
 
-        private string SetName()
+        public string SetName()
         {
             Console.Write("Enter name: ");
             return Console.ReadLine();
         }
 
-        private string ChooseRace()
+        public string ChooseRace()
         {
-            Console.Write("Choose race: ");
+            Console.Write("\n\tEnter race: ");
             return Console.ReadLine();
         }
 
@@ -120,13 +109,15 @@ namespace TextRPG
     class Monster : Entity
     {
         public string GangName { get; set; }
+        public string Rank;
         
-        public Monster(string name, string race, int health, Weapon weapon)
+        public Monster(string race, int level, string rank, int health,  Weapon weapon)
             //: base(name, race, health, hitpower)
         {
-            Name = name;
             Race = race;
-            MaxHealth = CurrentHealth = health;
+            Level = level;
+            Rank = rank;
+            MaxHealth = CurrentHealth = health; 
             Weapon = weapon;
         }
         

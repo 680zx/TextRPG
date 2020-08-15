@@ -28,11 +28,11 @@ namespace TextRPG
                 {
                     Items.Add(item);
                     FilledVolume += item.Size;
-                    Console.WriteLine(item.Name + " is added to inventory.");
+                    Console.WriteLine("\n\t" + item.Name + " is added to inventory.");
                 }
                 else
                 {
-                    Console.WriteLine($"\n{item.Name} is too large({item.Size}) to add to inventory({FilledVolume}/{MaxVolume})!");
+                    Console.WriteLine($"\n\t{item.Name} is too large({item.Size}) to add to inventory({FilledVolume}/{MaxVolume})!");
                     break;
                 }
                     

@@ -10,7 +10,7 @@ namespace DeflectTheBall
     {
         public static int Width, Height;
         private static string header;
-        private static char[] line; 
+        private static char[] line;
 
         public static void GameMenu()
         {
@@ -25,6 +25,22 @@ namespace DeflectTheBall
                 "\n\t2) Help" +
                 "\n\t3) Exit\n\n");
             CreateScreen();
+        }
+
+        public static void CreationScreen()
+        {
+            Console.Clear();
+            CreateScreen();
+
+            header = "Creation Menu";
+            Console.SetCursorPosition((Width - header.Length) / 2, 4);
+            Console.Write(header);
+            Console.SetCursorPosition((Width - header.Length) / 2, 5);
+
+            line = new char[header.Length];
+            Array.Fill(line, '*');
+            Console.Write(line);
+            Console.SetCursorPosition(8, 8);
         }
 
         public static void VillageScreen(Village village, Player player)
@@ -97,15 +113,73 @@ namespace DeflectTheBall
             int j = 1;
             for (int i = 0; i < scene.Traders.Length; i++, j++)
             {
-                Console.Write($"\n\t{j}) Move to {scene.Traders[i].StoreName}");
+                Console.Write($"\n\t{j}) Move to the {scene.Traders[i].StoreName}");
             }
 
-            Console.Write($"\n\t{j}) Return to {scene.Name}");
+            Console.Write($"\n\t{j}) Return to the {scene.Name}");
 
             CreateScreen();
         }
 
+        public static void TradeScreen(Trader trader, Player player)
+        {
+            Console.Clear();
 
+            header = trader.StoreName;
+            Console.SetCursorPosition((Width - header.Length) / 2, 4);
+            Console.Write(header);
+            Console.SetCursorPosition((Width - header.Length) / 2, 5);
+
+            line = new char[header.Length];
+            Array.Fill(line, '.');
+            Console.Write(line);
+
+            Console.SetCursorPosition(8, 8);
+            Console.Write($"Ho-ho-ho, welcome back, {player.Name}. I brought a lot" +
+                $"\n\tof new goods:\n");
+            Console.Write("\n\t\tName\t\tPower\tSize\tPrice\n");
+
+            int j = 1;
+            for (int i = 0; i < trader.Items.Length; i++, j++)
+            {
+                Console.Write($"\n\t{j}) {trader.Items[i].Name}\t\t" +
+                    $"{trader.Items[i].Power}\t{trader.Items[i].Size}\t{trader.Items[i].Price}");
+            }
+
+            Console.Write($"\n\t{j}) Return to the market");
+
+            Console.SetCursorPosition(8, Height - 4);
+            Console.Write($"My Gold: {player.Gold}\tBag volume: " +
+                $"{player.Inventory.FilledVolume}/{player.Inventory.MaxVolume}");
+
+            CreateScreen();
+        }
+
+        public static void BattleScreen(Player player, Monster monster)
+        {
+            Console.Clear();
+            CreateScreen();
+
+            header = monster.Rank + " Battle";
+            Console.SetCursorPosition((Width - header.Length) / 2, 4);
+            Console.Write(header);
+            Console.SetCursorPosition((Width - header.Length) / 2, 5);
+
+            line = new char[header.Length];
+            Array.Fill(line, 'V');
+            Console.Write(line);
+
+            Console.SetCursorPosition(8, 8);
+            Console.Write($"This dirty {monster.Race} level {monster.Level} attacked me. " +
+                $"What will I do?\n");
+            
+            int i = 0;
+            foreach (string action in player.BattleActions)
+            {
+                Console.Write($"\n\t{++i}) {action}");
+            }
+
+        }
 
         public static void GameplayScreen()
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace TextRPG
 {
@@ -9,7 +10,7 @@ namespace TextRPG
     {
         public string Name;
         public string Race;
-        public Weapon Weapon;
+        public Weapon _weapon;
         public int CurrentHealth;
         public int MaxHealth;
         public int HitPower;
@@ -17,31 +18,27 @@ namespace TextRPG
         public int Gold;
         public bool isDead;
 
-        public void Hit(Entity entity)
-        {
-            Console.WriteLine(Name + " hit " + entity.Name + " and did " + Weapon.Power + " damage");
-            entity.CurrentHealth -= Weapon.Power;
-        }
+        public abstract void Hit(Entity entity);
 
         public void ShowStats()
         {
             Console.WriteLine("\n\n\tCharacteristics of " + Name + " race " + Race +
-                                "health: " +  CurrentHealth + "/" + MaxHealth +   "\n\thit power: " + Weapon.Power);
+                                "health: " +  CurrentHealth + "/" + MaxHealth +   "\n\thit power: " + _weapon.Power);
         }
     }
 
     class Player : Entity
     {
         public Scene CurrentLocation;
-        public Potion Potion;
+        public Potion _potion;
 
         public Inventory Inventory = new Inventory();
         private Squad PlayerSquad = new Squad();
         public string[] BattleActions = new string[] {"Hit monster", "Heal myself", "Change weapon"};
         
-        public Player(Scene InitilalLocation)
+        public Player(Scene InitilalLocation, Weapon weapon)
         {
-            //Weapon = weapon;
+            _weapon = weapon;
             //Potion = potion;
             MaxHealth = CurrentHealth = 100;
             HitPower = 15;
@@ -63,6 +60,13 @@ namespace TextRPG
             return PlayerChoice;
         }
 
+        public override void Hit(Entity monster)
+        {
+            monster.CurrentHealth -= _weapon.Power;
+            if (monster.CurrentHealth <= 0)
+                monster.isDead = true;
+        }
+
         public void MoveTo(Scene scene)
         {
             CurrentLocation = scene;
@@ -71,16 +75,26 @@ namespace TextRPG
 
         public void RestoreHealth() 
         {
-            if (CurrentHealth + Potion.Power >= MaxHealth)
-                CurrentHealth = MaxHealth;
+            var index = Inventory.Items.FindIndex(x => x.isWeapon == false);
+            if (index != -1)
+            {
+                _potion = (Potion)Inventory.Items[index];
+                Inventory.Items.RemoveAt(index);
+
+                if (CurrentHealth + _potion.Power >= MaxHealth)
+                    CurrentHealth = MaxHealth;
+                else
+                    CurrentHealth += _potion.Power;
+                Console.WriteLine("\n\t" + Name + " restored health.");
+            }
             else
-                CurrentHealth += Potion.Power;
-            Console.WriteLine(Name + " restored health");
+                Console.WriteLine("\n\tHealing potions is out.");
+            
         }
 
         public void ChangeWeapon() 
         {
-            Console.WriteLine("Changed weapon on");
+            Console.WriteLine("Changed weapon on ");
         }
 
         public void BuyItem()
@@ -93,16 +107,17 @@ namespace TextRPG
             Console.WriteLine("Продать вещь");
         }
 
-        public string SetName()
+        public void SetName()
         {
             Console.Write("Enter name: ");
-            return Console.ReadLine();
+            Name = Console.ReadLine();
+            //return Console.ReadLine();
         }
 
-        public string ChooseRace()
+        public void ChooseRace()
         {
             Console.Write("\n\tEnter race: ");
-            return Console.ReadLine();
+            Race = Console.ReadLine();
         }
 
     }
@@ -118,9 +133,17 @@ namespace TextRPG
             Level = level;
             Rank = rank;
             MaxHealth = CurrentHealth = health; 
-            Weapon = weapon;
+            _weapon = weapon;
         }
-        
+
+        public override void Hit(Entity player)
+        {
+            player.CurrentHealth -= _weapon.Power;
+            
+            if (player.CurrentHealth <= 0)
+                player.isDead = true;
+        }
+
         public void RunAway()
         {
             Console.WriteLine("Монстр убегает");

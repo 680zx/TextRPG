@@ -17,8 +17,6 @@ namespace TextRPG
 
     class Weapon : Item
     {
-        
-
         public Weapon(string name, int damage, int size, int price)
         {
             Name = name;

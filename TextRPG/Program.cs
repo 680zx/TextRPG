@@ -1,6 +1,7 @@
 ﻿using DeflectTheBall;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Threading;
 
 namespace TextRPG
@@ -33,33 +34,39 @@ namespace TextRPG
             //Window.TradeScreen(LittleVilla.Traders[1], Player);
             //Window.BattleScreen(Player, Orc);
             //Console.ReadKey();
+            
 
             Window.GameMenu();
             while(Console.ReadKey().KeyChar != '3')
-            {
+            { 
+                player = new Player(LittleVilla, Utilities.CommonQualityMeleeWeapons[1]);
+                
                 Window.CreationScreen();
-                player = new Player(LittleVilla);
-
+                //player.SetName();
+                //player.ChooseRace();
+                player.Name = "TestPlayer";
+                player.Race = "TestPlayer";
+                //player.Inventory.Add(Utilities.CommonQualityMeleeWeapons[0]);
+                player.Inventory.Add(Utilities.CommonQualityPotions[1]);
+                player.Inventory.Add(Utilities.CommonQualityPotions[1]);
+                player.Inventory.Show();
+                //Thread.Sleep(2000);
 
                 while (! player.isDead)
                 {
-                    player.SetName();
-                    player.ChooseRace();
-                    player.Inventory.Add(Utilities.CommonQualityMeleeWeapons[0]);
-
-                    Thread.Sleep(1000);
-
                     Window.VillageScreen(LittleVilla, player);
 
                     switch (Console.ReadKey().KeyChar)
                     {
                         case '1':
-                            Utilities.Battle(player, Utilities.monsters[0]);
-                            Thread.Sleep(1000);
+                            Battle.Run(player);
                             break;
                     }
                 }
-                
+                Window.GameOverScreen();
+                Thread.Sleep(1000);
+                Window.GameMenu();
+               
             }
             //Console.ReadKey();
 

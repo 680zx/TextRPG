@@ -9,7 +9,7 @@ namespace TextRPG
         public int MaxVolume;
         public int FilledVolume;
 
-        private List<Item> Items = new List<Item>();
+        public List<Item> Items = new List<Item>();
 
         public void Show() 
         {

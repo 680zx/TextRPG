@@ -67,24 +67,26 @@ namespace TextRPG
             new Trader("Alchemist Lami", 100, CommonQualityPotions)
         };
 
-        public static Monster[] monsters = new Monster[]
+        public static Monster GetMonster(Player player)
         {
-            new Monster("Orc", 1, "Common", 120, CommonQualityMeleeWeapons[0]),
-            new Monster("Elf", 2, "Common", 70, CommonQualityMeleeWeapons[1]),
-            new Monster("Bandit", 3, "Common",  100, CommonQualityMeleeWeapons[3]),
-            new Monster("Orc - Dux ", 4, "Rare", 170, CommonQualityMeleeWeapons[4]),
-            new Monster("Elf Archer", 5, "Rare", 80, CommonQualityRangeWeapons[1]),
-            new Monster("Bandit Leader", 6, "Rare", 250, CommonQualityMeleeWeapons[3]),
-            new Monster("Pirate", 7, "Legendary", 120, CommonQualityRangeWeapons[4]),
-            new Monster("Bounty Hunter", 8, "Legendary", 180, CommonQualityRangeWeapons[2]),
-            new Monster("Knight", 9, "Legendary", 300, PerfectQualityMeleeWeapons[3])
-        };
+            Monster[] monsters = new Monster[]
+            {
+                new Monster("Orc", 1, "Common", 80, CommonQualityMeleeWeapons[0]),
+                new Monster("Elf", 2, "Common", 70, CommonQualityMeleeWeapons[1]),
+                new Monster("Bandit", 3, "Common",  100, CommonQualityMeleeWeapons[3]),
+                new Monster("Orc - Dux ", 4, "Rare", 170, CommonQualityMeleeWeapons[4]),
+                new Monster("Elf Archer", 5, "Rare", 80, CommonQualityRangeWeapons[1]),
+                new Monster("Bandit Leader", 6, "Rare", 250, CommonQualityMeleeWeapons[3]),
+                new Monster("Pirate", 7, "Legendary", 120, CommonQualityRangeWeapons[4]),
+                new Monster("Bounty Hunter", 8, "Legendary", 180, CommonQualityRangeWeapons[2]),
+                new Monster("Knight", 9, "Legendary", 300, PerfectQualityMeleeWeapons[3])
+            };
 
-        public static void Battle(Player player, Monster monster)
-        {
-            Window.BattleScreen(player, monster);
-            
-        }
+            foreach (Monster monster in monsters)
+                if (monster.Level == player.Level)
+                    return monster;
 
+            return null;
+        }    
     }
 }

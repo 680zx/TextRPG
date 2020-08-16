@@ -181,7 +181,14 @@ namespace DeflectTheBall
 
         }
 
-        public static void GameplayScreen()
+        public static void BattleActionScreen(Player player, Monster monster)
+        {
+            Console.SetCursorPosition(8, 10);
+            Console.Write($"{player.Name} health: {player.CurrentHealth}" +
+                            $"\t{monster.Name} health:\t{monster.CurrentHealth}");
+        }
+
+        public static void GamePlayScreen()
         {
             CreateFrame();
 
@@ -209,7 +216,7 @@ namespace DeflectTheBall
 
         public static void GameOverScreen()
         {
-            string msg = "Game Over";
+            string msg = "You Died";
             Console.Clear();
             Console.SetCursorPosition((Width - msg.Length) / 2, Height / 2);
             Console.WriteLine(msg);  

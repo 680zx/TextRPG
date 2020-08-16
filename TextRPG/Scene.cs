@@ -35,4 +35,12 @@ namespace TextRPG
             //Console.WriteLine(Name + " city");
         }
     }
+
+    class Market : Scene
+    {
+        public Market(string name, int population, Trader[] traders) : base(name, population, traders)
+        {
+            //Console.WriteLine(Name + " village");
+        }
+    }
 }

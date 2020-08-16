@@ -39,31 +39,33 @@ namespace TextRPG
             Window.GameMenu();
             while(Console.ReadKey().KeyChar != '3')
             { 
-                player = new Player(LittleVilla, Utilities.CommonQualityMeleeWeapons[1]);
+                player = new Player(RedCastle, Utilities.PerfectQualityMeleeWeapons[4]);
                 
                 Window.CreationScreen();
                 //player.SetName();
                 //player.ChooseRace();
                 player.Name = "TestPlayer";
                 player.Race = "TestPlayer";
+                player.Level = 8;
                 //player.Inventory.Add(Utilities.CommonQualityMeleeWeapons[0]);
                 player.Inventory.Add(Utilities.CommonQualityPotions[1]);
                 player.Inventory.Add(Utilities.CommonQualityPotions[1]);
                 player.Inventory.Show();
                 //Thread.Sleep(2000);
+                Window.CityScreen(RedCastle, player);
 
                 while (! player.isDead)
                 {
-                    Window.VillageScreen(LittleVilla, player);
-
-                    switch (Console.ReadKey().KeyChar)
+                    switch (Console.ReadKey(true).KeyChar)
                     {
                         case '1':
                             Battle.Run(player);
                             break;
+                        case '2':
+                            break;
                     }
                 }
-                Window.GameOverScreen();
+                
                 Thread.Sleep(1000);
                 Window.GameMenu();
                

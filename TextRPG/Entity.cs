@@ -31,17 +31,20 @@ namespace TextRPG
     {
         public Scene CurrentLocation;
         public Potion _potion;
+        public int ExperienceToUp = 200;
+        public int CurrentExperience;
+
 
         public Inventory Inventory = new Inventory();
         private Squad PlayerSquad = new Squad();
-        public string[] BattleActions = new string[] {"Hit monster", "Heal myself", "Change weapon"};
+        public string[] BattleActions = new string[] {"Hit monster", "Heal myself"};
         
         public Player(Scene InitilalLocation, Weapon weapon)
         {
             _weapon = weapon;
             //Potion = potion;
-            MaxHealth = CurrentHealth = 100;
-            HitPower = 15;
+            MaxHealth = CurrentHealth = 150;
+            //HitPower = 15;
             Inventory.MaxVolume = 20;
             Gold = 50;
             Level = 1;
@@ -65,6 +68,9 @@ namespace TextRPG
             monster.CurrentHealth -= _weapon.Power;
             if (monster.CurrentHealth <= 0)
                 monster.isDead = true;
+            Console.SetCursorPosition(8, 14);
+            Console.WriteLine($"{Name} hit {monster.Race} level {monster.Level} and" +
+                $" did damage {_weapon.Power}");
         }
 
         public void MoveTo(Scene scene)
@@ -78,20 +84,34 @@ namespace TextRPG
             var index = Inventory.Items.FindIndex(x => x.isWeapon == false);
             if (index != -1)
             {
-                _potion = (Potion)Inventory.Items[index];
-                Inventory.Items.RemoveAt(index);
+                if (CurrentHealth != MaxHealth)
+                {
+                    _potion = (Potion)Inventory.Items[index];
+                    Inventory.Items.RemoveAt(index);
 
-                if (CurrentHealth + _potion.Power >= MaxHealth)
-                    CurrentHealth = MaxHealth;
+                    if (CurrentHealth + _potion.Power >= MaxHealth)
+                        CurrentHealth = MaxHealth;
+                    else
+                        CurrentHealth += _potion.Power;
+                    Console.SetCursorPosition(8, 14);
+                    Console.Write($"{Name} restored health to {CurrentHealth}");
+
+                    Console.SetCursorPosition(8, 20);
+                    Console.Write($"{Name} health: {CurrentHealth}");
+                }
                 else
-                    CurrentHealth += _potion.Power;
-                Console.WriteLine("\n\t" + Name + " restored health.");
+                {
+                    Console.SetCursorPosition(8, 14);
+                    Console.Write($"You current health level is up to the max health level");
+                }
+                
             }
             else
-                Console.WriteLine("\n\tHealing potions is out.");
-            
+            {
+                Console.SetCursorPosition(8, 14);
+                Console.WriteLine("Healing potions is out.");
+            }
         }
-
         public void ChangeWeapon() 
         {
             Console.WriteLine("Changed weapon on ");
@@ -121,6 +141,7 @@ namespace TextRPG
         }
 
     }
+
     class Monster : Entity
     {
         public string GangName { get; set; }
@@ -142,6 +163,10 @@ namespace TextRPG
             
             if (player.CurrentHealth <= 0)
                 player.isDead = true;
+
+            Console.SetCursorPosition(8, 16);
+            Console.WriteLine($"{Race} level {Level} hit {player.Name} and" +
+                $" did damage {_weapon.Power}");
         }
 
         public void RunAway()

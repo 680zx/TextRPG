@@ -179,13 +179,43 @@ namespace DeflectTheBall
                 Console.Write($"\n\t{++i}) {action}");
             }
 
+            Console.SetCursorPosition(8, 20);
+            Console.Write($"{player.Name} health: {player.CurrentHealth}" +
+                $"\t{monster.Race} health: {monster.CurrentHealth}");
+
         }
 
-        public static void BattleActionScreen(Player player, Monster monster)
+        public static void HittingScreen(Player player, Monster monster)
         {
-            Console.SetCursorPosition(8, 10);
-            Console.Write($"{player.Name} health: {player.CurrentHealth}" +
-                            $"\t{monster.Name} health:\t{monster.CurrentHealth}");
+            Console.SetCursorPosition(8, 14);
+            Console.Write($"{player.Name} health: {player.CurrentHealth}/{player.MaxHealth}" +
+                            $"\t{monster.Name} health:\t{monster.CurrentHealth}/{monster.MaxHealth}");
+        }
+
+        public static void HealingScreen(Player player)
+        {
+            Console.SetCursorPosition(8, 14);
+            Console.Write($"{player.Name} restored health: {player.CurrentHealth}/{player.MaxHealth}");
+        }
+
+        public static void LevelUpScreen(Player player)
+        {
+            Console.Clear();
+            CreateScreen();
+
+            header = $"Congratulations! You achieved {player.Level} level.";
+            Console.SetCursorPosition((Width - header.Length)/2, Height/2);
+            Console.Write(header);
+        }
+
+        public static void EndBattleScreen(Monster monster)
+        {
+            Console.Clear();
+            CreateScreen();
+
+            header = $"Congratulations! You defeated {monster.Race} level {monster.Level}.";
+            Console.SetCursorPosition((Width - header.Length)/2, Height/2);
+            Console.Write(header);
         }
 
         public static void GamePlayScreen()
